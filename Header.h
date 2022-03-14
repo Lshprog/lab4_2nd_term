@@ -15,9 +15,10 @@ namespace treecalc {
 			Node* pop();
 		};
 	
-		void build_expression_tree(int ,char* );
+		void build_expression_tree(int size,char* s);
 		void create_rpn(int , char* );
 		void inorder(Node* z);
+		void derivative(Node* z,char k);
 
 	};
 }

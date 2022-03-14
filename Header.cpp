@@ -37,6 +37,7 @@ treecalc::BinaryTree::Node* treecalc::BinaryTree::Stack::pop()
 
 void treecalc::BinaryTree::build_expression_tree(int size,char* s)
 {
+	char k;
 	Stack numbers;
 	Node* x = new Node();
 	Node* y = new Node();
@@ -57,6 +58,10 @@ void treecalc::BinaryTree::build_expression_tree(int size,char* s)
 		}
 	}
 	inorder(z);
+	std::cout << '\n';
+	std::cout << "Dif for what variable? ";
+	std::cin >> k;
+	derivative(z,k);
 }
 
 
@@ -149,6 +154,64 @@ void treecalc::BinaryTree::inorder(Node* z)
 	inorder(z->right);
 	if (z->value == '*' || z->value == '/')
 		std::cout << ")";
+	
+}
+
+void treecalc::BinaryTree::derivative(Node* z,char k)
+{
+	if (z->value == '*') {
+		std::cout << '(';
+		derivative(z->left,k);
+		std::cout << ')';
+		std::cout << '*';
+		std::cout << '(';
+		inorder(z->right);
+		std::cout << ')';
+		std::cout << '+';
+		std::cout << '(';
+		derivative(z->right,k);
+		std::cout << ')';
+		std::cout << '*';
+		std::cout << '(';
+		inorder(z->left);
+		std::cout << ')';
+	}
+	else if (z->value == '/') {
+		std::cout << '(';
+		std::cout << '(';
+		derivative(z->left,k);
+		std::cout << ')';
+		std::cout << '*';
+		std::cout << '(';
+		inorder(z->right);
+		std::cout << ')';
+		std::cout << '-';
+		std::cout << '(';
+		derivative(z->right,k);
+		std::cout << ')';
+		std::cout << '*';
+		std::cout << '(';
+		inorder(z->left);
+		std::cout << ')';
+		std::cout << ")/(";
+		inorder(z->right);
+		std::cout << ")^2";
+	}
+	else if (z->value == '+'|| z->value == '-') {
+		derivative(z->left,k);
+		std::cout << z->value;
+		derivative(z->right,k);
+
+	}
+	else if (z->value == k) {
+		std::cout << 'd'<<k;
+	}
+	else if (z->value>47 && z->value<59){
+		std::cout << '0';
+	}
+	else {
+		std::cout << '1';
+	}
 	
 }
 
