@@ -8,6 +8,7 @@ namespace treecalc {
 			Node* next;
 			Node();
 			Node(char value);
+			~Node();
 		};
 		struct Stack {
 			Node* head = nullptr;

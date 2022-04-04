@@ -15,6 +15,11 @@ treecalc::BinaryTree::Node::Node(char value) {
 	this->next = nullptr;
 }
 
+treecalc::BinaryTree::Node::~Node()
+{
+	delete left,right,next;
+}
+
 void treecalc::BinaryTree::Stack::push(Node* n)
 {
 	if (head == nullptr)
@@ -136,6 +141,7 @@ void treecalc::BinaryTree::create_rpn(int size,char* s) {
 	}
 	std::cout << '\n';
 	build_expression_tree(temp_count , new_string);
+	
 }
 
 void treecalc::BinaryTree::inorder(Node* z)
