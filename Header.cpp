@@ -67,6 +67,7 @@ void treecalc::BinaryTree::build_expression_tree(int size,char* s)
 	std::cout << "Dif for what variable? ";
 	std::cin >> k;
 	derivative(z,k);
+	delete x, y, z;
 }
 
 
@@ -141,6 +142,7 @@ void treecalc::BinaryTree::create_rpn(int size,char* s) {
 	}
 	std::cout << '\n';
 	build_expression_tree(temp_count , new_string);
+	delete x, y, z,temp_useless;
 	
 }
 
